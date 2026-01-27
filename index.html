@@ -1,350 +1,591 @@
 <!doctype html>
-<html>
-
+<html lang="en">
 <head>
-<title>Chunlin Tian</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chunlin Tian</title>
 
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="keywords" content="Chunlin Tian, University of Macau"> 
-<meta name="description" content="Chunlin's home page">
-<link rel="stylesheet" href="css/jemdoc.css" type="text/css" />
+  <meta name="keywords" content="Chunlin Tian, University of Macau" />
+  <meta name="description" content="Chunlin's home page" />
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  <!-- Keep jemdoc if you like; we will "scope" our styles to avoid conflicts -->
+  <link rel="stylesheet" href="css/jemdoc.css" type="text/css" />
 
-  ga('create', 'UA-137722442-1', 'auto');
-  ga('send', 'pageview');
-</script>
+  <style>
+    :root{
+      --maxw: 980px;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #ffffff;
+      --card: #fafafa;
+      --shadow: 0 10px 24px rgba(0,0,0,.06);
+      --shadow2: 0 14px 30px rgba(0,0,0,.08);
+      --radius: 14px;
+      --blue: #2563eb;
+    }
 
+    /* Scope everything to .page so jemdoc won't unexpectedly override */
+    .page{
+      color: var(--text);
+      background: var(--bg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    .container{
+      max-width: var(--maxw);
+      margin: 26px auto 72px auto;
+      padding: 0 18px;
+    }
+
+    .page a{ text-decoration: none; }
+    .page a:hover{ text-decoration: underline; }
+
+    .page p, .page li{ line-height: 1.7; }
+    .muted{ color: var(--muted); }
+
+    /* Headings */
+    .page h1, .page h2{
+      margin: 0;
+      line-height: 1.2;
+    }
+    .page h2{
+      margin-top: 30px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 22px;
+      letter-spacing: .2px;
+    }
+
+    /* ============ Hero ============ */
+    .hero{
+      display: grid;
+      grid-template-columns: 1fr 170px;
+      gap: 18px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero-main{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+    .hero h1{
+      font-size: 36px;
+      letter-spacing: .2px;
+    }
+
+    .subtitle{
+      font-weight: 650;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .email-line{
+      color: var(--text);
+      font-size: 15px;
+    }
+    .email-line a{
+      font-weight: 750;
+    }
+
+    .links{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .links a{ font-weight: 650; }
+    .links .sep{ color: var(--border); }
+
+    .job-hiring{
+      margin-top: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(37,99,235,.18);
+      background: rgba(37,99,235,.06);
+      border-radius: 999px;
+      font-weight: 750;
+      width: fit-content;
+      max-width: 100%;
+    }
+    .job-hiring strong{ font-weight: 850; }
+
+    .avatar{
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    @media (max-width: 640px){
+      .hero{
+        grid-template-columns: 1fr;
+      }
+      .avatar{
+        width: 140px;
+        height: 140px;
+      }
+      .hero h1{ font-size: 32px; }
+    }
+
+    /* ============ Education line ============ */
+    .rowline{
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .rowline .right{
+      margin-left: auto;
+      color: var(--muted);
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    /* ============ Publications ============ */
+    .pub-note{
+      margin: 10px 0 4px 0;
+      color: var(--muted);
+    }
+    .pub-list{
+      margin-top: 12px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .pub-card{
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .pub-card:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow2);
+      background: #fff;
+    }
+
+    .pub-img{
+      width: 170px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .pub-title{
+      font-weight: 900;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+    .pub-authors{ margin: 4px 0; }
+    .pub-venue{
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .badge{
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      color: #b45309;
+      vertical-align: baseline;
+      margin-left: 6px;
+    }
+
+    .pub-links{
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .pub-links a{ font-weight: 750; }
+
+    @media (max-width: 700px){
+      .pub-card{ grid-template-columns: 1fr; }
+      .pub-img{
+        width: 100%;
+        max-width: 420px;
+        justify-self: start;
+      }
+    }
+
+    /* ============ Lists ============ */
+    .page ul{
+      margin-top: 10px;
+    }
+    .page ul li{
+      margin: 6px 0;
+    }
+
+    /* ============ Footer widget ============ */
+    .visit-map{
+      margin-top: 28px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+    }
+    .visit-map img{
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    /* ============ Publications ============ */
+    .pub-list{
+      margin-top: 14px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .pub-card{
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+    }
+
+    .pub-img{
+      width: 170px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .pub-title{
+      font-weight: 800;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .pub-authors{ margin: 4px 0; }
+
+    .pub-venue{
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ====== 统一论文解释高亮（不改原句） ====== */
+    .pub-tagline{
+      margin-top: 8px;
+      padding: 7px 10px;
+      border-left: 4px solid rgba(37,99,235,.45);
+      background: rgba(37,99,235,.06);
+      border-radius: 10px;
+      font-style: italic;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 700px){
+      .pub-card{ grid-template-columns: 1fr; }
+      .pub-img{ width: 100%; max-width: 420px; }
+    }
+    
+  </style>
+
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-137722442-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 </head>
 
+<body class="page">
+  <div class="container">
 
-<body>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-main">
+        <h1>Chunlin Tian</h1>
 
-<div id="layout-content" style="margin-top:25px">
-
-<img src="./img/avatar.jpg" style="float:right; margin-top:30px; width: 20%;border-radius: 5px;" />
-<table>
-	<tbody>
-		<tr>
-			<td width="75%">
-				<div id="toptitle">
-					<h1>Chunlin Tian<h1>
-				</div>
-                <h3>Ph.D Student</h3>
-				<p>
-                    <a href='https://www.um.edu.mo/'> University of Macau</a></br>
-				</p>
-				<p >
-					<a href="mailto: tianclin0212@gmail.com">Email</a> &nbsp;|&nbsp;
-                    <a href="https://github.com/Clin0212/">Github</a> &nbsp;|&nbsp;
-                    <a href="https://x.com/clin_tian" >Twitter</a> &nbsp;|&nbsp;
-                    <a href="https://www.linkedin.com/in/charlie-chunlin-tian-2911b224a/" >Linkedin</a> &nbsp;|&nbsp;
-                    <a href="https://scholar.google.com/citations?user=2D1fd0QAAAAJ&hl=en">Google Scholar</a>
-				  </p>
-			</td>
-		<tr>
-	</tbody>
-</table>
-
-<style>
-  .content_wrapper {
-    display: flex;
-    align-items: center;
-    gap: 12px;      
-    margin-bottom: 4px;
-  }
-  
-  .time_wrapper {
-    margin-left: auto; 
-    padding-left: 16px; 
-    font-style: italic;
-    color: #000000;
-  }
-  </style>
-				
-
-<h2>Short Bio</h2> 
-    <p>👋 I am a fourth-year PhD student in Computer Science at <a href='https://skliotsc.um.edu.mo/'> State Key Laboratory of Internet of Things for Smart City (SKL-IOTSC)</a>, <a href='https://www.um.edu.mo/'> University of Macau</a> 
-    under the supervision of <a href='https://www.fst.um.edu.mo/personal/llili/'>Prof. Li Li</a> and <a href='https://www.fst.um.edu.mo/personal/czxu/'>Prof. Chengzhong Xu (IEEE Fellow)</a>. Currently, I am visiting the  <a href='https://mlsys.cst.cam.ac.uk/'> Machine Learning Systems Group</a> at <a href='https://www.cam.ac.uk/'> University of Cambridge</a> under the supervision of <a href='https://niclane.org/'>Prof. Nicholas D. Lane</a>.
-    I am also fortunate to be mentored by and to collaborate closely with <a href='https://aleczhanshi.github.io/'>Dr. Zhan Shi</a> and <a href='https://cartus.github.io/'>Prof. Zhijiang Guo</a>.
-    Before joining UM, I received my BEng degree from <a href='http://en.xjtu.edu.cn/'>Xi'an Jiaotong University</a> in 2022.
-  </p>
-
-  <p>💡I am broadly interested in ML for System. My current research interests focus on Efficient Machine Learning System at the Edge.
-	On these topics, I have published 10+ papers in leading conferences/journals such as: MICRO, ATC, TPDS and SenSys (System-related); NeurIPS, ICML and IJCAI (ML-related), with several selected for Oral presentations.
- </p>
-
- <h2>Education</h2>
- <ul>
-   <li>
-     <p>
-       <div class='content_wrapper'>
-         <strong>University of Macau</strong>
-         <div class='time_wrapper'><em>08/2022-Now</em></div>
-       </div>
-       PhD in Computer Science (<strong>
-         <a href='https://grs.um.edu.mo/index.php/prospective-students/phd-funding/um-macao-phd-scholarship/'>MPDS awardee</a>, 
-         AR: 30/1300+ = Top 2%</strong>)
-     </p>
-   </li>
-   <li>
-     <p>
-       <div class='content_wrapper'>
-         <strong>Xi'an Jiaotong University</strong>
-         <div class='time_wrapper'><em>09/2018-06/2022</em></div>
-       </div>
-       BEng in Internet of Things (<strong>GPA ranking: 2/27</strong>)
-     </p>
-   </li>
- </ul>
-
-
-<!-- <h2>News</h2> 
-	<p>
-	  <strong>[02/2025]</strong>  One paper has been accepted by IEEE TITS!<br>
-	</p>
-
-
-
-	<p>
-	  <strong>[01/2025]</strong>  One paper has been selected for Oral Presentation in AAAI 2025!<br>
-	</p>
-
-	<p>
-		<strong>[01/2025]</strong>  One paper has been accepted by IEEE TPAMI!<br>
-	</p> -->
-
-
-<h2>Selected Publications</h2>
-<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-
-	<p>
-		For a complete list of my publications, please refer to my <a href="https://scholar.google.com/citations?user=2D1fd0QAAAAJ&hl=en">Google Scholar</a> profile.
-	  </p>
-
-
-
-    <tr onmouseout="smerf_stop()" onmouseover="smerf_start()">
-      <td colspan="2" style="padding:20px; vertical-align:middle;">
-        <div style="display: flex; align-items: center;">
-        <!-- 图片部分 -->
-        <div style="flex: 0 0 20%; padding-right: 20px;">
-          <img src='./img/ATC2025.png' width="100%" style="box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.4); border-radius: 10px;">
+        <div class="subtitle">
+          Ph.D. Student · University of Macau<br>
+          Visiting Ph.D. Student · University of Cambridge
         </div>
-        <!-- 文字部分 -->
-        <div style="flex: 1;">
-          <a href='' target='_blank'>CLONE: Customizing LLMs for Efficient Latency-Aware Inference at the Edge.</a> 
-          <br>
-          <strong>Chunlin Tian</strong>, Xinpeng Qin, Kahou Tam, Li Li, Zijian Wang, Yuanzhe Zhao, Minglei Zhang and Chengzhong Xu
-          <br>
-           USENIX Annual Technical Conference <strong>(ATC)</strong>, 2025 <br>
-              [System Conf., <strong>CCF-A</strong>, AR: 100/634 = 15.8%]
+
+        <div class="email-line">
+          <strong>Email:</strong>
+          <a href="mailto:yc27402@um.edu.mo">yc27402@um.edu.mo</a>
+          &nbsp;|&nbsp;
+          <a href="mailto:ct720@cam.ac.uk">ct720@cam.ac.uk</a>
         </div>
+
+        <div class="links">
+          <a href="https://github.com/Clin0212/">GitHub</a><span class="sep">|</span>
+          <a href="https://x.com/clin_tian">Twitter</a><span class="sep">|</span>
+          <a href="https://www.linkedin.com/in/charlie-chunlin-tian-2911b224a/">LinkedIn</a><span class="sep">|</span>
+          <a href="https://scholar.google.com/citations?user=2D1fd0QAAAAJ&hl=en">Google Scholar</a>
         </div>
-      </td>
-      </tr>
 
-  <tr onmouseout="smerf_stop()" onmouseover="smerf_start()">
-	<td colspan="2" style="padding:20px; vertical-align:middle;">
-	  <div style="display: flex; align-items: center;">
-		<!-- 图片部分 -->
-		<div style="flex: 0 0 20%; padding-right: 20px;">
-		  <img src='./img/nips2024.png' width="100%" style="box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.4); border-radius: 10px;">
-		</div>
-		<!-- 文字部分 -->
-		<div style="flex: 1;">
-		  <a href='https://openreview.net/pdf?id=qEpi8uWX3N' target='_blank'>HydraLoRA: An Asymmetric LoRA Architecture for Efficient Fine-Tuning.</a> [<a href='https://github.com/Clin0212/HydraLoRA' target='_blank'>Code</a>] [<a href='https://mp.weixin.qq.com/s/M03cU4KSWXWVfNviUbn4yQ' target='_blank'>News</a>] 
-		  <br>
-		  <strong>Chunlin Tian</strong>, Zhan Shi, Zhijiang Guo, Li Li and Chengzhong Xu
-		  <br>
-		  38th Annual Conference on Neural Information Processing Systems <strong>(NeurIPS)</strong>, 2024 <br>
-          [ML Conf., <strong>CCF-A</strong>, <strong><span style="color: orangered;">Oral</span></strong>, AR: 61/15671 = Top 0.4%]
-		</div>
-	  </div>
-	</td>
-  </tr>
-
-
-  
-
-  <tr onmouseout="smerf_stop()" onmouseover="smerf_start()">
-	<td colspan="2" style="padding: 20px; vertical-align: middle;">
-	  <div style="display: flex; align-items: center;">
-		<!-- 图片部分 -->
-		<div style="flex: 0 0 20%; padding-right: 20px;">
-		  <img src='./img/icml2024.png' width="100%" 
-			   style="box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.4); border-radius: 10px;">
-		</div>
-		<!-- 文字部分 -->
-		<div style="flex: 1;">
-		  <a href='https://proceedings.mlr.press/v235/tian24d.html' target='_blank'>
-			Ranking-based Client Imitation Selection for Efficient Federated Learning.
-		  </a>
-		  <br>
-		  <strong>Chunlin Tian</strong>, Zhan Shi, Xinpeng Qin, Li Li and Chengzhong Xu
-		  <br>
-		  41st International Conference on Machine Learning <strong>(ICML)</strong>, 2024 <br>
-		 [ML Conf., <strong>CCF-A</strong>, AR: 2609/9653 = 27.0%]
-		</div>
-	  </div>
-	</td>
-  </tr>
-
-
-  <tr onmouseout="smerf_stop()" onmouseover="smerf_start()">
-	<td colspan="2" style="padding: 20px; vertical-align: middle;">
-	  <div style="display: flex; align-items: center;">
-		<!-- 图片部分 -->
-		<div style="flex: 0 0 20%; padding-right: 20px;">
-		  <img src='./img/TPDS2024.png' width="100%" 
-			   style="box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.4); border-radius: 10px;">
-		</div>
-		<!-- 文字部分 -->
-		<div style="flex: 1;">
-		<a href='https://ieeexplore.ieee.org/document/10716559?denied=' target='_blank'>Breaking the Memory Wall for Heterogeneous Federated Learning via Model Splitting.</a> 
-		  <br>
-		  <strong>Chunlin Tian</strong>, Li Li, Kahou Tam, Yebo Wu, Chengzhong Xu
-		  <br>
-		  IEEE Transactions on Parallel and Distributed Systems <strong>(TPDS)</strong>, 2024 <br>
-          [System Journal, <strong>CCF-A</strong>]
-		</div>
-	  </div>
-	</td>
-  </tr>
-  
-
-  <tr onmouseout="smerf_stop()" onmouseover="smerf_start()">
-    <td colspan="2" style="padding: 20px; vertical-align: middle;">
-      <div style="display: flex; align-items: center;">
-      <!-- 图片部分 -->
-      <div style="flex: 0 0 20%; padding-right: 20px;">
-        <img src='./img/IJCAI2024.png' width="100%" 
-           style="box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.4); border-radius: 10px;">
-      </div>
-      <!-- 文字部分 -->
-      <div style="flex: 1;">
-        <a href='https://www.ijcai.org/proceedings/2024/0526.pdf' target='_blank'>FedGCS: A Generative Framework for Efficient Client Selection in Federated Learning via Gradient-based Optimization.</a><br>
-        Zhiyuan Ning*, <strong>Chunlin Tian*</strong>, Meng Xiao, Wei Fan, Pengyang Wang, Li Li, Pengfei Wang and Yuanchun Zhou<br>
-        33rd International Joint Conference on Artificial Intelligence <strong>(IJCAI)</strong>, 2024 <br>
-              [AI Conf., <strong>CCF-A</strong>, AR: 791/5651 = 14.0%]
-      </div>
-      </div>
-    </td>
-    </tr>
-
-
-
-
-  <tr onmouseout="smerf_stop()" onmouseover="smerf_start()">
-    <td colspan="2" style="padding: 20px; vertical-align: middle;">
-      <div style="display: flex; align-items: center;">
-      <!-- 图片部分 -->
-      <div style="flex: 0 0 20%; padding-right: 20px;">
-        <img src='./img/Sensys2024.png' width="100%" 
-           style="box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.4); border-radius: 10px;">
-      </div>
-      <!-- 文字部分 -->
-      <div style="flex: 1;">
-        <a href='https://dl.acm.org/doi/10.1145/3666025.3699346' target='_blank'>FedHybrid: Breaking the Memory Wall of Federated Learning via Hybrid Tensor Management.</a><br>
-        Kahou Tam, <strong>Chunlin Tian</strong>, Li Li, Haikai Zhao, Chengzhong Xu<br>
-        22nd ACM Conference on Embedded Networked Sensor Systems <strong>(SenSys)</strong>, 2024 <br>
-              [Mobile System Conf., <strong>CCF-B</strong>, AR: 58/313 = 18.5%]
-      </div>
-      </div>
-    </td>
-    </tr>  
-
-    <tr onmouseout="smerf_stop()" onmouseover="smerf_start()">
-      <td colspan="2" style="padding: 20px; vertical-align: middle;">
-        <div style="display: flex; align-items: center;">
-        <!-- 图片部分 -->
-        <div style="flex: 0 0 20%; padding-right: 20px;">
-          <img src='./img/micro2022.png' width="100%" 
-             style="box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.4); border-radius: 10px;">
+        <div class="job-hiring">
+          🚀 <strong>Open to:</strong> Faculty · Postdoc · Research Scientist
         </div>
-        <!-- 文字部分 -->
-        <div style="flex: 1;">
-          <a href='https://ieeexplore.ieee.org/abstract/document/9923843' target='_blank'>HARMONY: Heterogeneity-Aware Hierarchical Management for Federated Learning System.</a><br>
-          <strong>Chunlin Tian</strong>, Li Li, Zhan Shi, Jun Wang and Chengzhong Xu<br>
-          55th IEEE/ACM International Symposium on Microarchitecture <strong>(MICRO)</strong>, 2022 <br>
-                [System Arch. Conf., <strong>CCF-A</strong>, AR: 83/369 = 22.5%]
+      </div>
+
+      <img class="avatar" src="./img/avatar.jpg" alt="Chunlin Tian" />
+    </section>
+
+    <!-- Bio -->
+    <h2>Short Bio</h2>
+    <p>
+      👋 I am a final-year PhD student in Computer Science at the
+      <a href="https://skliotsc.um.edu.mo/">State Key Laboratory of Internet of Things for Smart City (SKL-IOTSC)</a>,
+      <a href="https://www.um.edu.mo/">University of Macau</a>,
+      under the supervision of <a href="https://www.fst.um.edu.mo/personal/llili/">Prof. Li Li</a> and
+      <a href="https://www.fst.um.edu.mo/personal/czxu/">Prof. Chengzhong Xu (IEEE Fellow)</a>.
+      Currently, I am a visiting researcher at the
+      <a href="https://mlsys.cst.cam.ac.uk/">Machine Learning Systems Group</a>,
+      <a href="https://www.cam.ac.uk/">University of Cambridge</a>,
+      under the supervision of <a href="https://niclane.org/">Prof. Nicholas D. Lane</a>.
+      I am also fortunate to be mentored by and collaborate closely with
+      <a href="https://aleczhanshi.github.io/">Dr. Zhan Shi</a> and
+      <a href="https://cartus.github.io/">Prof. Zhijiang Guo</a>.
+      Before joining UM, I received my BEng degree from
+      <a href="http://en.xjtu.edu.cn/">Xi’an Jiaotong University</a> in 2022.
+    </p>
+
+    <p>
+      💡 I am broadly interested in ML for System. My research focuses on efficient machine learning systems and edge AI systems.
+      I specialize in full-stack software–hardware co-design, spanning from algorithms to systems, to address the stringent SWaP constraints in deploying foundation models on edge devices.
+      On these topics, I have published 20+ papers in leading venues, with several selected for Oral presentations.
+      Currently, I am particularly interested in edge reasoning and edge-based healthcare applications.
+    </p>
+
+    <!-- Education -->
+    <h2>Education</h2>
+    <ul>
+      <li>
+        <div class="rowline">
+          <strong>University of Macau</strong>
+          <div class="right">08/2022–Now</div>
         </div>
+        PhD in Computer Science (<strong>
+          <a href="https://grs.um.edu.mo/index.php/prospective-students/phd-funding/um-macao-phd-scholarship/">MPDS awardee</a></strong>)
+      </li>
+
+      <li>
+        <div class="rowline">
+          <strong>Xi'an Jiaotong University</strong>
+          <div class="right">09/2018–06/2022</div>
         </div>
-      </td>
-      </tr>  
+        BEng in Internet of Things (<strong>Outstanding Graduate</strong>)
+      </li>
+    </ul>
 
-      
+    <!-- Publications -->
+    <h2>Selected Publications</h2>
+    <p class="pub-note">
+      For a complete list of my publications, please refer to my
+      <a href="https://scholar.google.com/citations?user=2D1fd0QAAAAJ&hl=en">Google Scholar</a> profile.
+    </p>
 
+    <div class="pub-list">
 
+      <div class="pub-card">
+        <img class="pub-img" src="./img/ATC2025.png" alt="ATC 2025" />
+        <div>
+          <div class="pub-title">
+            <a href="#" target="_blank" rel="noopener">CLONE: Customizing LLMs for Efficient Latency-Aware Inference at the Edge.</a>
+          </div>
+          <div class="pub-authors">
+            <strong>Chunlin Tian</strong>, Xinpeng Qin, Kahou Tam, Li Li, Zijian Wang, Yuanzhe Zhao, Minglei Zhang and Chengzhong Xu
+          </div>
+          <div class="pub-venue">
+            ATC 2025. [AR: 100/634 = 15.8%]
+            <strong> – When one size doesn’t fit all, CLONE it to beat the edge latency!</strong>
+          </div>
+        </div>
+      </div>
 
+      <div class="pub-card">
+        <img class="pub-img" src="./img/nips2024.png" alt="NeurIPS 2024" />
+        <div>
+          <div class="pub-title">
+            <a href="https://openreview.net/pdf?id=qEpi8uWX3N" target="_blank" rel="noopener">HydraLoRA: An Asymmetric LoRA Architecture for Efficient Fine-Tuning.</a>
+            <span class="badge">Oral</span>
+          </div>
+          <div class="pub-links">
+            <a href="https://github.com/Clin0212/HydraLoRA" target="_blank" rel="noopener">Code</a>
+            <a href="https://mp.weixin.qq.com/s/M03cU4KSWXWVfNviUbn4yQ" target="_blank" rel="noopener">News</a>
+          </div>
+          <div class="pub-authors">
+            <strong>Chunlin Tian</strong>, Zhan Shi, Zhijiang Guo, Li Li and Chengzhong Xu
+          </div>
+          <div class="pub-venue">
+            NeurIPS 2024. [AR: 61/15671 = Top 0.4%] <strong>– Unleash the asymmetric heads of Hydra to tame the beast of fine-tuning!</strong>
+          </div>
+        </div>
+      </div>
 
-</tbody></table>
+      <div class="pub-card">
+        <img class="pub-img" src="./img/icml2024.png" alt="ICML 2024" />
+        <div>
+          <div class="pub-title">
+            <a href="https://proceedings.mlr.press/v235/tian24d.html" target="_blank" rel="noopener">
+              Ranking-based Client Imitation Selection for Efficient Federated Learning.
+            </a>
+          </div>
+          <div class="pub-authors">
+            <strong>Chunlin Tian</strong>, Zhan Shi, Xinpeng Qin, Li Li and Chengzhong Xu
+          </div>
+          <div class="pub-venue">
+            ICML 2024. [AR: 2609/9653 = 27.0%] <strong>– Don’t play dice with clients; Rank and Imitate for the win!</strong>
+          </div>
+        </div>
+      </div>
 
+      <div class="pub-card">
+        <img class="pub-img" src="./img/TPDS2024.png" alt="TPDS 2024" />
+        <div>
+          <div class="pub-title">
+            <a href="https://ieeexplore.ieee.org/document/10716559?denied=" target="_blank" rel="noopener">
+              Breaking the Memory Wall for Heterogeneous Federated Learning via Model Splitting.
+            </a>
+          </div>
+          <div class="pub-authors">
+            <strong>Chunlin Tian</strong>, Li Li, Kahou Tam, Yebo Wu, Chengzhong Xu
+          </div>
+          <div class="pub-venue">
+            IEEE TPDS 2024. <strong>– Smash the Memory Wall by splitting the model, not the device!</strong>
+          </div>
+        </div>
+      </div>
 
-<h2>Professional Services</h2> 
-<ul>
-    <li> <strong>Invited Conference Reviewer:</strong> NeurIPS, ICML, ICLR, CVPR, IJCAI, AAAI, ACM MM.</li>
-   <li> <strong>Invited Journal Reviewer:</strong> IEEE TPDS, IEEE TMC, IEEE TITS, ACM TIST.</li>
-  <li> <strong>External Reviewer:</strong> MICRO, HPCA, ASPLOS.</li>
-  </ul>
+      <div class="pub-card">
+        <img class="pub-img" src="./img/IJCAI2024.png" alt="IJCAI 2024" />
+        <div>
+          <div class="pub-title">
+            <a href="https://www.ijcai.org/proceedings/2024/0526.pdf" target="_blank" rel="noopener">
+              FedGCS: A Generative Framework for Efficient Client Selection in Federated Learning via Gradient-based Optimization.
+            </a>
+          </div>
+          <div class="pub-authors">
+            Zhiyuan Ning*, <strong>Chunlin Tian*</strong>, Meng Xiao, Wei Fan, Pengyang Wang, Li Li, Pengfei Wang and Yuanchun Zhou
+          </div>
+          <div class="pub-venue">
+            IJCAI 2024. [AR: 791/5651 = 14.0%] <strong>– Why search for the perfect client when you can generate one via gradients!</strong>
+          </div>
+        </div>
+      </div>
 
+      <div class="pub-card">
+        <img class="pub-img" src="./img/Sensys2024.png" alt="SenSys 2024" />
+        <div>
+          <div class="pub-title">
+            <a href="https://dl.acm.org/doi/10.1145/3666025.3699346" target="_blank" rel="noopener">
+              FedHybrid: Breaking the Memory Wall of Federated Learning via Hybrid Tensor Management.
+            </a>
+          </div>
+          <div class="pub-authors">
+            Kahou Tam, <strong>Chunlin Tian</strong>, Li Li, Haikai Zhao, Chengzhong Xu
+          </div>
+          <div class="pub-venue">
+            SenSys 2024. [AR: 58/313 = 18.5%] <strong>– When memory gets tight, go Hybrid to keep the training flowing!</strong>
+          </div>
+        </div>
+      </div>
 
+      <div class="pub-card">
+        <img class="pub-img" src="./img/micro2022.png" alt="MICRO 2022" />
+        <div>
+          <div class="pub-title">
+            <a href="https://ieeexplore.ieee.org/abstract/document/9923843" target="_blank" rel="noopener">
+              HARMONY: Heterogeneity-Aware Hierarchical Management for Federated Learning System.
+            </a>
+          </div>
+          <div class="pub-authors">
+            <strong>Chunlin Tian</strong>, Li Li, Zhan Shi, Jun Wang and Chengzhong Xu
+          </div>
+          <div class="pub-venue">
+            MICRO 2022. [AR: 83/369 = 22.5%] <strong>– Bring order to heterogeneous chaos with hierarchical HARMONY!</strong>
+          </div>
+        </div>
+      </div>
 
+    </div>
 
+    <!-- Services -->
+    <h2>Professional Services</h2>
+    <ul>
+      <li><strong>Invited Conference Reviewer:</strong> NeurIPS, ICML, ICLR, CVPR, IJCAI, AAAI, ACM MM.</li>
+      <li>
+        <strong>Invited Journal Reviewer:</strong>
+        <span class="muted">IEEE (TPDS, TMC, TPAMI, TCAD, TVLSI, TNNLS, TSN, TKDE, TITS), ACM TIST.</span>
+      </li>
+      <li><strong>External Reviewer:</strong> MICRO, HPCA, ASPLOS.</li>
+    </ul>
 
+    <!-- Students -->
+    <h2>Mentored Students</h2>
+    <p>✨If you are passionate about research and innovation, I warmly invite you to join us on this exciting academic journey!</p>
+    <ul>
+      <li><strong>Xinpeng Qin</strong>, UESTC (B.S.) ---&gt; Tsinghua University (M.S.)</li>
+      <li><strong>Shuaihang Zhong</strong>, UESTC (B.S.) ---&gt; Nanjing University (M.S.)</li>
+      <li><strong>Xuyang Wei</strong>, UESTC (B.S.) ---&gt; UESTC (M.S.)</li>
+      <li><strong>Yunqi Li</strong>, RPI (B.S.) ---&gt; UNC (M.S.)</li>
+      <li><strong>Shitian Li</strong>, UMAC (B.S.) ---&gt; NUS (M.S.)</li>
+    </ul>
 
+    <!-- Awards -->
+    <h2>Awards</h2>
+    <ul>
+      <li><em>10/2024</em>, NeurIPS 2024 Scholar Award</li>
+      <li><em>08/2022</em>, UM Macao PhD Scholarship</li>
+      <li><em>06/2022</em>, Outstanding Graduate, Xi'an Jiaotong University</li>
+      <li><em>09/2019/2020/2021</em>, Outstanding Student, Xi'an Jiaotong University</li>
+      <li><em>10/2020</em>, The ABU Asia-Pacific Robot Contest (ROBOCON), First Prize</li>
+    </ul>
 
-<h2>Mentored Students</h2> 
-✨If you are passionate about research and innovation, I warmly invite you to join us on this exciting academic journey!
-<ul>
-  <li> <strong>Xinpeng Qin</strong>, UESTC (B.S.) ---> Tsinghua University (M.S.) </li>
-  <li> <strong>Shuaihang Zhong</strong>, UESTC (B.S.) ---> Nanjing University (M.S.) </li>
- <li> <strong>Xuyang Wei</strong>, UESTC (B.S.) ---> UESTC (M.S.) </li>
-  <li> <strong>Yunqi Li</strong>, RPI  (B.S.) ---> UNC (M.S.) </li>
-  <li> <strong>Shitian Li</strong>, UMAC (B.S.) ---> NUS (M.S.) </li>
-</ul>
+    <!-- TA -->
+    <h2>Teaching Assistants</h2>
+    <ul>
+      <li>CISC7203, Database and Data Mining Technologies @UM (Graduate), Spring 2025.</li>
+      <li>CISC7204, Data Science and Data Visualization @UM (Graduate), Fall 2024.</li>
+      <li>CISC1001, Programming Science @UM (Undergraduate), Spring 2024.</li>
+      <li>CISC2001, Computer Organization @UM (Undergraduate), Fall 2023.</li>
+      <li>CISC7303, Cloud Computing @UM (Graduate), Spring 2023.</li>
+      <li>CISC2001, Computer Organization @UM (Undergraduate), Fall 2022.</li>
+    </ul>
 
-<h2>Awards</h2>
-<ul>
-  <li><em>10/2024</em>, NeurIPS 2024 Scholar Award  </li>
-  <li><em>08/2022</em>, UM Macao PhD Scholarship </li>
-  <li><em>06/2022</em>, Outstanding Graduate, Xi'an Jiaotong University</li>
-  <li><em>09/2019/2020/2021</em>, Outstanding Student, Xi'an Jiaotong University</li>
-  <li><em>10/2020</em>, The ABU Asia-Pacific Robot Contest (ROBOCON), First Prize</li>
-</ul>
+    <!-- Visitor map -->
+    <div class="visit-map">
+      <a href="https://mapmyvisitors.com/web/1bzqy" title="Visit tracker">
+        <img src="https://mapmyvisitors.com/map.png?d=weqS9lIGfcHnB2SFttLHTOEkjY5cXaERlJZlWto7I-U&cl=ffffff" alt="Visitor map" />
+      </a>
+    </div>
 
-<h2>Teaching Assistants</h2>
-<ul>
-    <li>CISC7203, Database and Data Mining Technologies @UM (Graduate), Spring 2025.</li>
-    <li>CISC7204, Data Science and Data Visualization @UM (Graduate), Fall 2024.</li>
-    <li>CISC1001, Programming Science @UM (Undergraduate), Spring 2024.</li>
-    <li>CISC2001, Computer Organization @UM (Undergraduate), Fall 2023</li>
-    <li>CISC7303, Cloud Computing @UM (Graduate), Spring 2023.</li>
-    <li>CISC2001, Computer Organization @UM (Undergraduate), Fall 2022.</li>
-</ul>	 
-
-<!-- <h2>Invited Talks</h2> 
-<ul>
-  <li>  <p> <em>11/2024</em>, <a href="https://www.techbeat.net/talk-info?id=922" target='_blank'>TechBeat</a>  </p> 
-  </li>
-
-  <li>  <p> <em>11/2024</em>, <a href="https://www.aitime.cn/" target='_blank'>AI Time</a> </p> 
-  </li>
-</ul> -->
-
-						
-<!-- 访问统计地图 -->
-<div class="clustrmaps-container">
-    <a href="https://mapmyvisitors.com/web/1bzqy"  title="Visit tracker"><img src="https://mapmyvisitors.com/map.png?d=weqS9lIGfcHnB2SFttLHTOEkjY5cXaERlJZlWto7I-U&cl=ffffff" /></a>
-  </a>
-</div>
-						
-
-
+  </div>
 </body>
-
 </html>
