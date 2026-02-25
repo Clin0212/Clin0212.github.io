@@ -59,7 +59,6 @@
         --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.45);
       }
       a:hover{ text-decoration: none; }
-      .nav{ backdrop-filter: blur(12px); }
     }
 
     *{ box-sizing: border-box; }
@@ -81,68 +80,6 @@
       max-width: var(--maxw);
       margin: 88px auto 90px auto;
       padding: 0 24px;
-    }
-
-    /* ===== Top nav ===== */
-    .nav{
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 99;
-      background: rgba(255,255,255,0.76);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-    }
-    @media (prefers-color-scheme: dark){
-      .nav{ background: rgba(11,18,32,0.72); }
-    }
-    .nav-inner{
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-    .nav-left{
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 180px;
-    }
-    .nav-dot{
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--primary);
-      box-shadow: 0 0 0 4px rgba(37,99,235,0.18);
-    }
-    .nav-name{
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
-      font-size: 14px;
-      white-space: nowrap;
-    }
-    .nav-links{
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      font-size: 13px;
-    }
-    .nav-links a{
-      color: var(--text-body);
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
-    }
-    .nav-links a:hover{
-      border-color: var(--border);
-      background: rgba(148,163,184,0.10);
-      text-decoration: none;
-      color: var(--text-main);
     }
 
     /* ===== Links ===== */
@@ -299,33 +236,15 @@
       box-shadow: var(--shadow-hover);
     }
 
-    @media (max-width: 700px){
-      .container{ margin-top: 78px; }
-      .hero{ grid-template-columns: 1fr; gap: 18px; }
+    @media (max-width: 700px){      .hero{ grid-template-columns: 1fr; gap: 18px; }
       .hero h1{ font-size: 34px; }
-      .avatar{ width: 150px; height: 150px; }
-      .nav-left{ min-width: auto; }
-    }
+      .avatar{ width: 150px; height: 150px; }    }
 
     /* ===== Bio ===== */
     .bio-text{
       text-align: justify;
       margin-top: 8px;
     }
-
-    /* ===== Highlight box (Research Interests) ===== */
-    .highlight{
-      margin-top: 22px;
-      padding: 16px 18px;
-      background: linear-gradient(180deg, rgba(148,163,184,0.10), rgba(148,163,184,0.06));
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--primary);
-      border-radius: 12px;
-    }
-    .highlight p{ margin: 0; }
-    .highlight p + p{ margin-top: 10px; }
-    .highlight strong{ color: var(--text-main); }
-
     /* ===== Education ===== */
     .edu-header{
       display: flex;
@@ -342,6 +261,37 @@
       display: flex;
       flex-direction: column;
       gap: 18px;
+    }
+    .pub-tabs{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: -6px 0 18px 0;
+    }
+    .pub-tab{
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text-body);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .pub-tab:hover{
+      border-color: rgba(37,99,235,0.28);
+      color: var(--text-main);
+      text-decoration: none;
+    }
+    .pub-tab.active{
+      color: var(--primary-2);
+      background: var(--primary-light);
+      border-color: rgba(37,99,235,0.22);
+    }
+    .pub-card.is-hidden{
+      display: none;
     }
 
     .pub-card{
@@ -370,6 +320,12 @@
       box-shadow: 0 6px 16px rgba(15,23,42,0.06);
     }
 
+    .pub-details{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
     .pub-title{
       font-size: 17px;
       font-weight: 800;
@@ -395,9 +351,9 @@
 
     .pub-venue{
       font-size: 13.6px;
-      color: var(--text-body);
-      font-weight: 600;
-      opacity: 0.92;
+      color: var(--primary-2);
+      font-weight: 800;
+      opacity: 0.95;
     }
 
     .pub-tagline{
@@ -413,7 +369,6 @@
       font-style: italic;
       font-weight: 600;
     }
-
     .badge{
       display: inline-block;
       vertical-align: middle;
@@ -518,25 +473,6 @@
 
 <body>
 
-  <!-- Top Nav -->
-  <div class="nav">
-    <div class="nav-inner">
-      <div class="nav-left">
-        <span class="nav-dot" aria-hidden="true"></span>
-        <span class="nav-name">Chunlin Tian</span>
-      </div>
-      <div class="nav-links">
-        <a href="#bio">Bio</a>
-        <a href="#education">Education</a>
-        <a href="#publications">Publications</a>
-        <a href="#services">Services</a>
-        <a href="#students">Students</a>
-        <a href="#awards">Awards</a>
-        <a href="#teaching">Teaching</a>
-      </div>
-    </div>
-  </div>
-
   <a class="to-top" href="#top" aria-label="Back to top">↑</a>
 
   <div class="container" id="top">
@@ -579,28 +515,16 @@
     <p class="bio-text">
       👋 I am a final-year Ph.D. candidate in Computer Science at the
       <a href="https://skliotsc.um.edu.mo/" target="_blank" rel="noopener">State Key Laboratory of Internet of Things for Smart City (SKL-IOTSC)</a>,
-      <a href="https://www.um.edu.mo/" target="_blank" rel="noopener">University of Macau</a>,
-      advised by <a href="https://www.fst.um.edu.mo/personal/llili/" target="_blank" rel="noopener">Prof. Li Li</a> and
+      <a href="https://www.um.edu.mo/" target="_blank" rel="noopener">University of Macau</a>, advised by
+      <a href="https://www.fst.um.edu.mo/personal/llili/" target="_blank" rel="noopener">Prof. Li Li</a> and
       <a href="https://www.fst.um.edu.mo/personal/czxu/" target="_blank" rel="noopener">Prof. Chengzhong Xu (IEEE Fellow)</a>.
-      Currently, I am a Visiting Researcher at the
+      I am currently a Visiting Researcher at the
       <a href="https://mlsys.cst.cam.ac.uk/" target="_blank" rel="noopener">Machine Learning Systems Group</a>,
-      <a href="https://www.cam.ac.uk/" target="_blank" rel="noopener">University of Cambridge</a>,
-      working with <a href="https://niclane.org/" target="_blank" rel="noopener">Prof. Nicholas D. Lane</a>.
-      I also collaborate closely with <a href="https://aleczhanshi.github.io/" target="_blank" rel="noopener">Dr. Zhan Shi</a> and
+      <a href="https://www.cam.ac.uk/" target="_blank" rel="noopener">University of Cambridge</a>, working with
+      <a href="https://niclane.org/" target="_blank" rel="noopener">Prof. Nicholas D. Lane</a>. I also collaborate with <a href="https://aleczhanshi.github.io/" target="_blank" rel="noopener">Dr. Zhan Shi</a> and
       <a href="https://cartus.github.io/" target="_blank" rel="noopener">Prof. Zhijiang Guo</a>.
-      Previously, I obtained my B.Eng. from <a href="http://en.xjtu.edu.cn/" target="_blank" rel="noopener">Xi’an Jiaotong University</a> in 2022.
+      My research focuses on <strong>Efficient Machine Learning Systems</strong> and <strong>Edge AI</strong>, I specialize in software–hardware co-design, spanning from algorithms to systems, to address the stringent SWaP (Space, Weight, and Power) constraints in deploying foundation models on edge devices.  I have published 20+ papers in top-tier venues, including several Oral presentations.
     </p>
-
-    <div class="highlight">
-      <p style="font-size:16px;">
-        💡 <strong>Research Interests:</strong> I specialize in <strong>ML for Systems</strong> and <strong>Edge AI</strong>.
-      </p>
-      <p style="font-size:15px;">
-        My work focuses on <strong>software–hardware co-design</strong> to address stringent SWaP (Size, Weight, and Power) constraints for foundation models on edge devices.
-        I have published <strong>20+ papers</strong> in top-tier venues, including several Oral presentations.
-        Currently, I am exploring <em>edge reasoning</em> and <em>healthcare applications</em>.
-      </p>
-    </div>
 
     <h2 id="education">Education</h2>
     <ul>
@@ -627,9 +551,14 @@
       <a href="https://scholar.google.com/citations?user=2D1fd0QAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a> profile.
     </p>
 
+    <div class="pub-tabs" role="tablist" aria-label="Publication categories">
+      <button class="pub-tab active" type="button" role="tab" aria-selected="true" data-pub-filter="system">System/Architecture</button>
+      <button class="pub-tab" type="button" role="tab" aria-selected="false" data-pub-filter="ml">Machine Learning</button>
+    </div>
+
     <div class="pub-list">
 
-      <div class="pub-card">
+      <div class="pub-card" data-pub-category="system">
         <img class="pub-img" src="./img/ATC2025.png" alt="ATC 2025" />
         <div class="pub-details">
           <div class="pub-title">
@@ -643,7 +572,7 @@
         </div>
       </div>
 
-      <div class="pub-card">
+      <div class="pub-card" data-pub-category="ml">
         <img class="pub-img" src="./img/nips2024.png" alt="NeurIPS 2024" />
         <div class="pub-details">
           <div class="pub-title">
@@ -656,13 +585,11 @@
           <div class="pub-venue">NeurIPS 2024. [AR: 61/15671 = Top 0.4%]</div>
           <div class="pub-tagline">“Unleash the asymmetric heads of Hydra to tame the beast of fine-tuning!”</div>
           <div class="pub-links">
-            <a class="pill" href="https://github.com/Clin0212/HydraLoRA" target="_blank" rel="noopener">Code</a>
-            <a class="pill" href="https://mp.weixin.qq.com/s/M03cU4KSWXWVfNviUbn4yQ" target="_blank" rel="noopener">News</a>
           </div>
         </div>
       </div>
 
-      <div class="pub-card">
+      <div class="pub-card" data-pub-category="ml">
         <img class="pub-img" src="./img/icml2024.png" alt="ICML 2024" />
         <div class="pub-details">
           <div class="pub-title">
@@ -678,7 +605,7 @@
         </div>
       </div>
 
-      <div class="pub-card">
+      <div class="pub-card" data-pub-category="system">
         <img class="pub-img" src="./img/TPDS2024.png" alt="TPDS 2024" />
         <div class="pub-details">
           <div class="pub-title">
@@ -694,7 +621,23 @@
         </div>
       </div>
 
-      <div class="pub-card">
+      <div class="pub-card" data-pub-category="system">
+        <img class="pub-img" src="./img/TPDS2026.png" alt="TPDS 2026 Floe" />
+        <div class="pub-details">
+          <div class="pub-title">
+            <a href="https://arxiv.org/pdf/2602.14302v1" target="_blank" rel="noopener">
+              Floe: Federated Specialization for Real-Time LLM-SLM Inference.
+            </a>
+          </div>
+          <div class="pub-authors">
+            <strong>Chunlin Tian</strong>, Kahou Tam, Yebo Wu, Shuaihang Zhong, Li Li, Nicholas D. Lane, Chengzhong Xu
+          </div>
+          <div class="pub-venue">TPDS 2026.</div>
+          <div class="pub-tagline">“Specialize federated LLM-SLM pipelines to keep real-time edge inference afloat!”</div>
+        </div>
+      </div>
+
+      <div class="pub-card" data-pub-category="ml">
         <img class="pub-img" src="./img/IJCAI2024.png" alt="IJCAI 2024" />
         <div class="pub-details">
           <div class="pub-title">
@@ -710,7 +653,39 @@
         </div>
       </div>
 
-      <div class="pub-card">
+      <div class="pub-card" data-pub-category="ml">
+        <img class="pub-img" src="./img/TMLR2026.png" alt="TMLR 2026" />
+        <div class="pub-details">
+          <div class="pub-title">
+            <a href="https://openreview.net/pdf?id=rnCqbuIWnn" target="_blank" rel="noopener">
+              A Survey on Federated Fine-Tuning of Large Language Models.
+            </a>
+          </div>
+          <div class="pub-authors">
+            Yebo Wu, <strong>Chunlin Tian</strong>, Jingguang Li, He Sun, KaHou Tam, Zhanting Zhou, Haicheng Liao, Jing Xiong, Zhijiang Guo, Li Li, Chengzhong Xu
+          </div>
+          <div class="pub-venue">TMLR 2026.</div>
+          <div class="pub-tagline">“A practical map for navigating federated fine-tuning in the LLM era!”</div>
+        </div>
+      </div>
+
+      <div class="pub-card" data-pub-category="ml">
+        <img class="pub-img" src="./img/iclr2023.png" alt="ICLR 2023 Tiny" />
+        <div class="pub-details">
+          <div class="pub-title">
+            <a href="https://openreview.net/pdf?id=wecTsVkrjit" target="_blank" rel="noopener">
+              Learn to Select: Efficient Cross-device Federated Learning via Reinforcement Learning.
+            </a>
+          </div>
+          <div class="pub-authors">
+            <strong>Chunlin Tian</strong>, Zhan Shi and Li Li
+          </div>
+          <div class="pub-venue">ICLR 2023, Tiny.</div>
+          <div class="pub-tagline">“Don’t just train every client, learn which ones are worth the round!”</div>
+        </div>
+      </div>
+
+      <div class="pub-card" data-pub-category="system">
         <img class="pub-img" src="./img/Sensys2024.png" alt="SenSys 2024" />
         <div class="pub-details">
           <div class="pub-title">
@@ -726,7 +701,7 @@
         </div>
       </div>
 
-      <div class="pub-card">
+      <div class="pub-card" data-pub-category="system">
         <img class="pub-img" src="./img/micro2022.png" alt="MICRO 2022" />
         <div class="pub-details">
           <div class="pub-title">
@@ -799,6 +774,58 @@
     };
     window.addEventListener('scroll', toggleToTop, { passive: true });
     toggleToTop();
+
+    // Publication category tabs
+    const pubTabs = document.querySelectorAll('.pub-tab');
+    const pubList = document.querySelector('.pub-list');
+    const pubCards = document.querySelectorAll('.pub-card[data-pub-category]');
+    const pubOrder = {
+      system: [
+        'CLONE: Customizing LLMs',
+        'HARMONY: Heterogeneity-Aware Hierarchical',
+        'Floe: Federated Specialization',
+        'Breaking the Memory Wall for Heterogeneous',
+        'FedHybrid: Breaking the Memory Wall'
+      ],
+      ml: [
+        'HydraLoRA: An Asymmetric LoRA',
+        'A Survey on Federated Fine-Tuning',
+        'Ranking-based Client Imitation Selection',
+        'FedGCS: A Generative Framework',
+        'Learn to Select: Efficient Cross-device'
+      ]
+    };
+    const getPubTitle = (card) => (card.querySelector('.pub-title')?.innerText || '').trim();
+    const getPubRank = (card) => {
+      const category = card.dataset.pubCategory;
+      const title = getPubTitle(card);
+      const order = pubOrder[category] || [];
+      const idx = order.findIndex((key) => title.includes(key));
+      return idx === -1 ? 999 : idx;
+    };
+    if (pubList) {
+      [...pubCards]
+        .sort((a, b) => {
+          const catCmp = a.dataset.pubCategory.localeCompare(b.dataset.pubCategory);
+          if (catCmp !== 0) return catCmp;
+          return getPubRank(a) - getPubRank(b);
+        })
+        .forEach((card) => pubList.appendChild(card));
+    }
+    const setPubFilter = (category) => {
+      pubTabs.forEach((tab) => {
+        const active = tab.dataset.pubFilter === category;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      pubCards.forEach((card) => {
+        card.classList.toggle('is-hidden', card.dataset.pubCategory !== category);
+      });
+    };
+    pubTabs.forEach((tab) => {
+      tab.addEventListener('click', () => setPubFilter(tab.dataset.pubFilter));
+    });
+    setPubFilter('system');
   </script>
 
 </body>
