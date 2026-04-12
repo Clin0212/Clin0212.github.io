@@ -10,55 +10,54 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* ===== Palette ===== */
-      --primary: #2563eb;
-      --primary-2: #1d4ed8;
-      --primary-light: #eff6ff;
+      --primary: #1a3a5c;
+      --accent: #8b2332;
+      --accent-light: rgba(139,35,50,0.08);
+      --link: #1a5276;
+      --link-hover: #8b2332;
 
-      --text-main: #0f172a;     /* slightly darker for crisp headings */
-      --text-body: #334155;     /* slate */
-      --text-muted: #94a3b8;    /* muted slate */
+      --text-main: #1a1a2e;
+      --text-body: #3d3d5c;
+      --text-muted: #7a7a8c;
 
-      --bg: #ffffff;
+      --bg: #fafaf8;
       --card: #ffffff;
-      --card-soft: #f8fafc;     /* soft background */
-      --border: #eef2f7;        /* subtler than before */
+      --border: #e8e6e1;
+      --border-section: #d5d2cb;
 
-      /* ===== Layout ===== */
-      --maxw: 980px;
-      --radius: 14px;
+      --maxw: 860px;
+      --radius: 6px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
 
-      /* ===== Shadows ===== */
-      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
-      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
-      --shadow-hover: 0 12px 36px rgba(15, 23, 42, 0.12);
+      --font-serif: 'Source Serif 4', 'Georgia', 'Times New Roman', serif;
+      --font-sans: 'Inter', -apple-system, 'Segoe UI', sans-serif;
 
-      /* ===== Type ===== */
-      --lh: 1.65;
+      --lh: 1.7;
     }
 
-    /* ===== Dark mode (auto) ===== */
     @media (prefers-color-scheme: dark){
       :root{
-        --bg: #0b1220;
-        --card: #0f172a;
-        --card-soft: #0c162b;
-        --border: rgba(148, 163, 184, 0.16);
+        --bg: #141418;
+        --card: #1c1c22;
+        --border: #2e2e38;
+        --border-section: #3a3a48;
 
-        --text-main: #e2e8f0;
-        --text-body: #cbd5e1;
-        --text-muted: #94a3b8;
+        --text-main: #e8e6e1;
+        --text-body: #bbb8b0;
+        --text-muted: #7a7a8c;
 
-        --primary-light: rgba(37, 99, 235, 0.14);
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
-        --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.35);
-        --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.45);
+        --primary: #a8c4de;
+        --accent: #d4727e;
+        --accent-light: rgba(212,114,126,0.10);
+        --link: #8bb8d6;
+        --link-hover: #d4727e;
+
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.25);
       }
-      a:hover{ text-decoration: none; }
     }
 
     *{ box-sizing: border-box; }
@@ -66,258 +65,274 @@
 
     body{
       color: var(--text-body);
-      background: radial-gradient(1200px 700px at 20% -10%, rgba(37,99,235,0.12), transparent 55%),
-                  radial-gradient(900px 600px at 90% 0%, rgba(37,99,235,0.10), transparent 50%),
-                  var(--bg);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      font-family: var(--font-sans);
+      font-size: 15px;
       margin: 0;
       line-height: var(--lh);
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
     }
 
     .container{
       max-width: var(--maxw);
-      margin: 88px auto 90px auto;
-      padding: 0 24px;
+      margin: 36px auto 64px auto;
+      padding: 0 28px;
     }
 
     /* ===== Links ===== */
     a{
-      color: var(--primary);
+      color: var(--link);
       text-decoration: none;
-      transition: color 0.2s, opacity 0.2s, transform 0.2s;
+      transition: color 0.15s;
     }
     a:hover{
-      color: var(--primary-2);
+      color: var(--link-hover);
       text-decoration: underline;
     }
 
     /* ===== Typography ===== */
     h1, h2, h3{
+      font-family: var(--font-serif);
       color: var(--text-main);
       margin: 0;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
+      font-weight: 700;
     }
 
     h2{
-      margin-top: 54px;
-      margin-bottom: 22px;
-      font-size: 22px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    h2:before{
-      content: "";
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--primary);
-      box-shadow: 0 0 0 5px rgba(37,99,235,0.14);
-      flex: 0 0 auto;
+      margin-top: 32px;
+      margin-bottom: 14px;
+      font-size: 21px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border-section);
+      letter-spacing: -0.01em;
     }
 
-    p, li{ font-size: 16px; }
-    ul{ padding-left: 20px; margin: 10px 0 0 0; }
-    li{ margin-bottom: 8px; }
+    p{ font-size: 15px; margin-top: 0; margin-bottom: 12px; }
+    ul{ padding-left: 22px; margin: 8px 0 0 0; }
+    li{ margin-bottom: 7px; font-size: 15px; }
 
-    /* ===== Utility ===== */
-    .muted{ color: var(--text-muted); }
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-    }
+    .muted{ color: var(--text-muted); font-size: 14px; }
 
     /* ===== Hero ===== */
     .hero{
       display: grid;
-      grid-template-columns: 1fr 210px;
-      gap: 40px;
-      align-items: center;
-      margin-bottom: 34px;
+      grid-template-columns: 1fr 180px;
+      gap: 36px;
+      align-items: start;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
     }
 
     .hero-content{
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px;
     }
 
     .hero h1{
-      font-size: 44px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
     }
 
     .subtitle{
-      font-size: 17px;
+      font-size: 15px;
       color: var(--text-body);
-      line-height: 1.55;
+      line-height: 1.6;
     }
 
     .contact-info{
       font-size: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      color: var(--text-body);
+      color: var(--text-muted);
+      margin-top: 2px;
     }
     .contact-info a{
-      font-weight: 700;
       color: var(--text-main);
-      text-decoration: none;
-      border-bottom: 1px dashed rgba(148,163,184,0.6);
+      font-weight: 600;
     }
     .contact-info a:hover{
-      border-bottom-color: var(--primary);
-      text-decoration: none;
-      color: var(--primary-2);
+      color: var(--link-hover);
     }
 
     .social-links{
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 6px;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 14px;
     }
-    .pill{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(148,163,184,0.08);
-      color: var(--text-main);
-      font-size: 13px;
-      font-weight: 700;
+    .social-links a{
+      color: var(--link);
+      font-weight: 600;
       text-decoration: none;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      padding-bottom: 1px;
+      border-bottom: 1px solid transparent;
     }
-    .pill:hover{
-      transform: translateY(-1px);
-      background: rgba(37,99,235,0.10);
-      border-color: rgba(37,99,235,0.35);
+    .social-links a:hover{
+      color: var(--link-hover);
+      border-bottom-color: var(--link-hover);
       text-decoration: none;
-      color: var(--text-main);
     }
 
     .job-badge{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 14px;
-      background: linear-gradient(135deg, rgba(37,99,235,0.12) 0%, rgba(37,99,235,0.06) 100%);
-      border: 1px solid rgba(37,99,235,0.28);
+      display: inline-block;
+      padding: 5px 14px;
+      background: var(--accent-light);
+      border: 1px solid rgba(139,35,50,0.18);
+      border-left: 3px solid var(--accent);
       color: var(--text-main);
-      border-radius: 999px;
+      border-radius: 3px;
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 600;
       width: fit-content;
       margin-top: 6px;
     }
 
     .avatar{
-      width: 190px;
-      height: 190px;
+      width: 170px;
+      height: 170px;
       object-fit: cover;
-      border-radius: 22px;
-      box-shadow: var(--shadow-md);
+      border-radius: 8px;
       border: 1px solid var(--border);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .avatar:hover{
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
+      box-shadow: var(--shadow-sm);
     }
 
-    @media (max-width: 700px){      .hero{ grid-template-columns: 1fr; gap: 18px; }
-      .hero h1{ font-size: 34px; }
-      .avatar{ width: 150px; height: 150px; }    }
+    @media (max-width: 640px){
+      .hero{ grid-template-columns: 1fr; gap: 16px; }
+      .hero h1{ font-size: 26px; }
+      .avatar{ width: 140px; height: 140px; }
+    }
 
     /* ===== Bio ===== */
     .bio-text{
       text-align: justify;
-      margin-top: 8px;
+      margin-top: 6px;
     }
+
+    .research-interests{
+      margin: 4px 0 0 0;
+      padding-left: 22px;
+    }
+    .research-interests li{
+      margin-bottom: 4px;
+    }
+    .research-interests li strong{
+      color: var(--text-main);
+    }
+
     /* ===== Education ===== */
     .edu-header{
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
-    .edu-header strong{ color: var(--text-main); font-weight: 800; }
+    .edu-header strong{ color: var(--text-main); font-weight: 700; }
     .edu-date{ color: var(--text-muted); font-size: 13px; font-style: italic; }
+
+    /* ===== News ===== */
+    .news-list{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .news-list li{
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      margin: 0;
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+    .news-list li:last-child{ border-bottom: none; }
+    .news-date{
+      flex: 0 0 auto;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      min-width: 68px;
+      font-variant-numeric: tabular-nums;
+    }
+    .news-list li.news-hidden{ display: none; }
+    .news-toggle{
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--link);
+      border-radius: 4px;
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .news-toggle:hover{
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
     /* ===== Publications ===== */
     .pub-list{
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
     }
     .pub-tabs{
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin: -6px 0 18px 0;
+      gap: 6px;
+      margin: -4px 0 18px 0;
     }
     .pub-tab{
       appearance: none;
       border: 1px solid var(--border);
       background: var(--card);
-      color: var(--text-body);
-      border-radius: 999px;
-      padding: 7px 14px;
+      color: var(--text-muted);
+      border-radius: 4px;
+      padding: 5px 14px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
     }
     .pub-tab:hover{
-      border-color: rgba(37,99,235,0.28);
+      border-color: var(--border-section);
       color: var(--text-main);
-      text-decoration: none;
     }
     .pub-tab.active{
-      color: var(--primary-2);
-      background: var(--primary-light);
-      border-color: rgba(37,99,235,0.22);
+      color: var(--accent);
+      background: var(--accent-light);
+      border-color: rgba(139,35,50,0.20);
     }
-    .pub-card.is-hidden{
-      display: none;
-    }
+    .pub-card.is-hidden{ display: none; }
 
     .pub-card{
       display: grid;
-      grid-template-columns: 190px 1fr;
+      grid-template-columns: 170px 1fr;
       gap: 18px;
-      padding: 18px;
+      padding: 16px;
       border-radius: var(--radius);
       background: var(--card);
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: border-color 0.15s;
     }
     .pub-card:hover{
-      box-shadow: var(--shadow-hover);
-      border-color: rgba(37,99,235,0.28);
-      transform: translateY(-2px);
+      border-color: var(--border-section);
     }
 
     .pub-img{
       width: 100%;
       aspect-ratio: 16/10;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 4px;
       border: 1px solid var(--border);
-      box-shadow: 0 6px 16px rgba(15,23,42,0.06);
     }
 
     .pub-details{
@@ -327,101 +342,82 @@
     }
 
     .pub-title{
-      font-size: 17px;
-      font-weight: 800;
+      font-family: var(--font-serif);
+      font-size: 15.5px;
+      font-weight: 700;
       color: var(--text-main);
-      line-height: 1.4;
-      margin-bottom: 6px;
+      line-height: 1.45;
+      margin-bottom: 5px;
     }
     .pub-title a{
       color: var(--text-main);
       text-decoration: none;
     }
     .pub-title a:hover{
-      color: var(--primary-2);
+      color: var(--link-hover);
       text-decoration: underline;
     }
 
     .pub-authors{
-      font-size: 14.6px;
+      font-size: 13.5px;
       color: var(--text-body);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
+      line-height: 1.5;
     }
-    .pub-authors strong{ color: var(--text-main); font-weight: 800; }
+    .pub-authors strong{ color: var(--text-main); font-weight: 700; }
 
     .pub-venue{
-      font-size: 13.6px;
-      color: var(--primary-2);
-      font-weight: 800;
-      opacity: 0.95;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
     }
 
-    .pub-tagline{
-      margin-top: 10px;
-      padding: 9px 12px;
-      background: var(--primary-light);
-      border: 1px solid rgba(37,99,235,0.20);
-      border-left: 3px solid var(--primary);
-      border-radius: 10px;
-      font-size: 13.5px;
-      color: var(--text-main);
-      opacity: 0.95;
-      font-style: italic;
-      font-weight: 600;
-    }
     .badge{
       display: inline-block;
       vertical-align: middle;
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: rgba(245,158,11,0.16);
-      border: 1px solid rgba(245,158,11,0.30);
-      color: #b45309;
-      font-size: 11px;
-      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: var(--accent-light);
+      border: 1px solid rgba(139,35,50,0.20);
+      color: var(--accent);
+      font-family: var(--font-sans);
+      font-size: 10.5px;
+      font-weight: 700;
       text-transform: uppercase;
-      margin-left: 8px;
-      letter-spacing: 0.06em;
-    }
-    @media (prefers-color-scheme: dark){
-      .badge{ color: #fbbf24; }
+      margin-left: 6px;
+      letter-spacing: 0.05em;
     }
 
     .pub-links{
-      margin-top: 10px;
+      margin-top: 8px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       font-size: 13px;
     }
     .pub-links a{
-      font-weight: 800;
-      text-decoration: none;
+      font-weight: 600;
     }
 
-    @media (max-width: 760px){
+    @media (max-width: 640px){
       .pub-card{ grid-template-columns: 1fr; }
-      .pub-img{ max-width: 360px; }
+      .pub-img{ max-width: 280px; }
     }
 
-    /* ===== Footer widget ===== */
+    /* ===== Footer ===== */
     .footer-widget{
-      margin-top: 66px;
-      padding-top: 30px;
-      border-top: 1px solid var(--border);
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 2px solid var(--border-section);
       text-align: center;
     }
     .footer-widget img{
       max-width: 100%;
-      border-radius: 12px;
-      opacity: 0.9;
+      border-radius: 4px;
+      opacity: 0.85;
       border: 1px solid var(--border);
-      transition: opacity 0.2s ease, transform 0.2s ease;
     }
-    .footer-widget img:hover{
-      opacity: 1;
-      transform: translateY(-1px);
-    }
+    .footer-widget img:hover{ opacity: 1; }
 
     /* ===== Back to top ===== */
     .to-top{
@@ -432,30 +428,29 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
-      background: rgba(37,99,235,0.12);
-      border: 1px solid rgba(37,99,235,0.28);
-      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 16px;
       text-decoration: none;
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-sm);
       opacity: 0;
       pointer-events: none;
-      transform: translateY(6px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transition: opacity 0.2s;
     }
     .to-top.show{
       opacity: 1;
       pointer-events: auto;
-      transform: translateY(0);
     }
     .to-top:hover{
-      background: rgba(37,99,235,0.18);
+      color: var(--accent);
+      border-color: var(--accent);
       text-decoration: none;
     }
 
-    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
       *{ transition: none !important; scroll-behavior: auto !important; }
     }
@@ -473,7 +468,7 @@
 
 <body>
 
-  <a class="to-top" href="#top" aria-label="Back to top">↑</a>
+  <a class="to-top" href="#top" aria-label="Back to top">&uarr;</a>
 
   <div class="container" id="top">
 
@@ -482,38 +477,37 @@
         <div>
           <h1>Chunlin Tian</h1>
           <div class="subtitle">
-            Ph.D. Student · University of Macau<br>
-            Visiting Ph.D. Student · University of Cambridge
+            Ph.D. Candidate, University of Macau<br>
+            Visiting Researcher, University of Cambridge
           </div>
         </div>
 
         <div class="contact-info">
-          <div>Email:
-            <a href="mailto:yc27402@um.edu.mo">yc27402@um.edu.mo</a>
-            /
-            <a href="mailto:ct720@cam.ac.uk">ct720@cam.ac.uk</a>
-          </div>
+          Email:
+          <a href="mailto:yc27402@um.edu.mo">yc27402@um.edu.mo</a>
+          &nbsp;/&nbsp;
+          <a href="mailto:ct720@cam.ac.uk">ct720@cam.ac.uk</a>
         </div>
 
         <div class="social-links">
-          <a class="pill" href="https://github.com/Clin0212/" target="_blank" rel="noopener">GitHub</a>
-          <a class="pill" href="https://x.com/clin_tian" target="_blank" rel="noopener">Twitter</a>
-          <a class="pill" href="https://www.linkedin.com/in/charlie-chunlin-tian-2911b224a/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="pill" href="https://scholar.google.com/citations?user=2D1fd0QAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://scholar.google.com/citations?user=2D1fd0QAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://github.com/Clin0212/" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/charlie-chunlin-tian-2911b224a/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://x.com/clin_tian" target="_blank" rel="noopener">Twitter/X</a>
         </div>
 
         <div class="job-badge">
-          🚀 Open to: Faculty · Postdoc · Research Scientist
+          Open to positions: Faculty / Postdoc / Research Scientist
         </div>
       </div>
 
       <img class="avatar" src="./img/avatar.jpg" alt="Chunlin Tian" />
     </section>
 
-    <h2 id="bio">Short Bio</h2>
+    <h2 id="bio">About</h2>
 
     <p class="bio-text">
-      👋 I am a final-year Ph.D. candidate in Computer Science at the
+      I am a final-year Ph.D. candidate in Computer Science at the
       <a href="https://skliotsc.um.edu.mo/" target="_blank" rel="noopener">State Key Laboratory of Internet of Things for Smart City (SKL-IOTSC)</a>,
       <a href="https://www.um.edu.mo/" target="_blank" rel="noopener">University of Macau</a>, advised by
       <a href="https://www.fst.um.edu.mo/personal/llili/" target="_blank" rel="noopener">Prof. Li Li</a> and
@@ -523,37 +517,55 @@
       <a href="https://www.cam.ac.uk/" target="_blank" rel="noopener">University of Cambridge</a>, working with
       <a href="https://niclane.org/" target="_blank" rel="noopener">Prof. Nicholas D. Lane</a>. I also collaborate with <a href="https://aleczhanshi.github.io/" target="_blank" rel="noopener">Dr. Zhan Shi</a> and
       <a href="https://cartus.github.io/" target="_blank" rel="noopener">Prof. Zhijiang Guo</a>.
-      
-      My research focuses on <strong>Efficient Machine Learning System</strong> and <strong>Edge AI</strong>, I specialize in software–hardware co-design, spanning from algorithms to systems, to address the stringent SWaP (Space, Weight, and Power) constraints in deploying foundation models on edge devices. I have published 20+ papers in top-tier journals and conferences, including MICRO, USENIX ATC, TPDS, NeurIPS, and ICML, with several selected for Oral presentations.
     </p>
+    <p class="bio-text">
+      My research focuses on <strong>building full-stack edge intelligence systems</strong> &mdash; spanning algorithms, systems, and hardware &mdash; for real-world deployment of foundation models under resource constraints.
+    </p>
+    <ul class="research-interests">
+      <li><strong>Efficient Foundation Models for Edge Deployment.</strong></li>
+      <li><strong>Distributed &amp; Collaborative Edge AI Systems.</strong></li>
+      <li><strong>Hardware-Software Co-Design for Real-World AI Applications.</strong></li>
+    </ul>
+    <p class="bio-text" style="margin-top: 10px;">
+      I have published 20+ papers in top-tier journals and conferences, including MICRO, USENIX ATC, TPDS, NeurIPS, and ICML, with several selected for Oral presentations.
+    </p>
+
+    <h2 id="news">News</h2>
+    <ul class="news-list" id="newsList">
+      <li><span class="news-date">2026.04</span> <span>One paper (ChainFed) accepted to <strong>ACL 2026</strong>.</span></li>
+      <li><span class="news-date">2026.03</span> <span>Attended AI Forum at <strong>CUHK(SZ)</strong> and <strong>SLAI</strong>, and received the <strong>Best Presentation Award</strong>.</span></li>
+      <li><span class="news-date">2026.02</span> <span>One paper (Floe) accepted to <strong>IEEE TPDS 2026</strong>.</span></li>
+      <li class="news-hidden"><span class="news-date">2026.01</span> <span>One survey paper on Federated LLM accepted to <strong>TMLR 2026</strong>.</span></li>
+    </ul>
+    <button class="news-toggle" id="newsToggle" type="button">Show more</button>
 
     <h2 id="education">Education</h2>
     <ul>
       <li>
         <div class="edu-header">
           <strong>University of Macau</strong>
-          <span class="edu-date">08/2022–Now</span>
+          <span class="edu-date">08/2022 &ndash; Present</span>
         </div>
-        PhD in Computer Science (<strong><a href="https://grs.um.edu.mo/index.php/prospective-students/phd-funding/um-macao-phd-scholarship/" target="_blank" rel="noopener">MPDS awardee</a></strong>)
+        Ph.D. in Computer Science (<strong><a href="https://grs.um.edu.mo/index.php/prospective-students/phd-funding/um-macao-phd-scholarship/" target="_blank" rel="noopener">MPDS awardee</a></strong>)
       </li>
 
       <li>
         <div class="edu-header">
           <strong>Xi'an Jiaotong University</strong>
-          <span class="edu-date">09/2018–06/2022</span>
+          <span class="edu-date">09/2018 &ndash; 06/2022</span>
         </div>
-        BEng in Internet of Things (<strong>Outstanding Graduate</strong>)
+        B.Eng. in Internet of Things (<strong>Outstanding Graduate</strong>)
       </li>
     </ul>
 
     <h2 id="publications">Selected Publications</h2>
-    <p class="muted" style="margin-bottom: 22px;">
-      For a complete list of my publications, please refer to my
+    <p class="muted" style="margin-bottom: 18px;">
+      For a complete list, please see my
       <a href="https://scholar.google.com/citations?user=2D1fd0QAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a> profile.
     </p>
 
     <div class="pub-tabs" role="tablist" aria-label="Publication categories">
-      <button class="pub-tab active" type="button" role="tab" aria-selected="true" data-pub-filter="system">System/Architecture</button>
+      <button class="pub-tab active" type="button" role="tab" aria-selected="true" data-pub-filter="system">System / Architecture</button>
       <button class="pub-tab" type="button" role="tab" aria-selected="false" data-pub-filter="ml">Machine Learning</button>
     </div>
 
@@ -568,8 +580,7 @@
           <div class="pub-authors">
             <strong>Chunlin Tian</strong>, Xinpeng Qin, Kahou Tam, Li Li, Zijian Wang, Yuanzhe Zhao, Minglei Zhang and Chengzhong Xu
           </div>
-          <div class="pub-venue">ATC 2025. [AR: 100/634 = 15.8%]</div>
-          <div class="pub-tagline">“When one size doesn’t fit all, CLONE it to beat the edge latency!”</div>
+          <div class="pub-venue">USENIX ATC 2025. [AR: 100/634 = 15.8%]</div>
         </div>
       </div>
 
@@ -584,9 +595,6 @@
             <strong>Chunlin Tian</strong>, Zhan Shi, Zhijiang Guo, Li Li and Chengzhong Xu
           </div>
           <div class="pub-venue">NeurIPS 2024. [AR: 61/15671 = Top 0.4%]</div>
-          <div class="pub-tagline">“Unleash the asymmetric heads of Hydra to tame the beast of fine-tuning!”</div>
-          <div class="pub-links">
-          </div>
         </div>
       </div>
 
@@ -602,7 +610,6 @@
             <strong>Chunlin Tian</strong>, Zhan Shi, Xinpeng Qin, Li Li and Chengzhong Xu
           </div>
           <div class="pub-venue">ICML 2024. [AR: 2609/9653 = 27.0%]</div>
-          <div class="pub-tagline">“Don’t play dice with clients; Rank and Imitate for the win!”</div>
         </div>
       </div>
 
@@ -618,7 +625,6 @@
             <strong>Chunlin Tian</strong>, Li Li, Kahou Tam, Yebo Wu, Chengzhong Xu
           </div>
           <div class="pub-venue">IEEE TPDS 2024.</div>
-          <div class="pub-tagline">“Smash the Memory Wall by splitting the model, not the device!”</div>
         </div>
       </div>
 
@@ -633,8 +639,7 @@
           <div class="pub-authors">
             <strong>Chunlin Tian</strong>, Kahou Tam, Yebo Wu, Shuaihang Zhong, Li Li, Nicholas D. Lane, Chengzhong Xu
           </div>
-          <div class="pub-venue">TPDS 2026.</div>
-          <div class="pub-tagline">“Specialize federated LLM-SLM pipelines to keep real-time edge inference afloat!”</div>
+          <div class="pub-venue">IEEE TPDS 2026.</div>
         </div>
       </div>
 
@@ -650,7 +655,6 @@
             Zhiyuan Ning*, <strong>Chunlin Tian*</strong>, Meng Xiao, Wei Fan, Pengyang Wang, Li Li, Pengfei Wang and Yuanchun Zhou
           </div>
           <div class="pub-venue">IJCAI 2024. [AR: 791/5651 = 14.0%]</div>
-          <div class="pub-tagline">“Why search for the perfect client when you can generate one via gradients!”</div>
         </div>
       </div>
 
@@ -666,7 +670,6 @@
             Yebo Wu, <strong>Chunlin Tian</strong>, Jingguang Li, He Sun, KaHou Tam, Zhanting Zhou, Haicheng Liao, Jing Xiong, Zhijiang Guo, Li Li, Chengzhong Xu
           </div>
           <div class="pub-venue">TMLR 2026.</div>
-          <div class="pub-tagline">“A practical map for navigating federated fine-tuning in the LLM era!”</div>
         </div>
       </div>
 
@@ -682,7 +685,6 @@
             <strong>Chunlin Tian</strong>, Zhan Shi and Li Li
           </div>
           <div class="pub-venue">ICLR 2023, Tiny.</div>
-          <div class="pub-tagline">“Don’t just train every client, learn which ones are worth the round!”</div>
         </div>
       </div>
 
@@ -697,8 +699,7 @@
           <div class="pub-authors">
             Kahou Tam, <strong>Chunlin Tian</strong>, Li Li, Haikai Zhao, Chengzhong Xu
           </div>
-          <div class="pub-venue">SenSys 2024. [AR: 58/313 = 18.5%]</div>
-          <div class="pub-tagline">“When memory gets tight, go Hybrid to keep the training flowing!”</div>
+          <div class="pub-venue">ACM SenSys 2024. [AR: 58/313 = 18.5%]</div>
         </div>
       </div>
 
@@ -713,8 +714,7 @@
           <div class="pub-authors">
             <strong>Chunlin Tian</strong>, Li Li, Zhan Shi, Jun Wang and Chengzhong Xu
           </div>
-          <div class="pub-venue">MICRO 2022. [AR: 83/369 = 22.5%]</div>
-          <div class="pub-tagline">“Bring order to heterogeneous chaos with hierarchical HARMONY!”</div>
+          <div class="pub-venue">IEEE/ACM MICRO 2022. [AR: 83/369 = 22.5%]</div>
         </div>
       </div>
 
@@ -722,40 +722,40 @@
 
     <h2 id="services">Professional Services</h2>
     <ul>
-      <li><strong>Invited Conference Reviewer:</strong> NeurIPS, ICML, ICLR, CVPR, IJCAI, AAAI, ACM MM.</li>
-      <li><strong>Invited Journal Reviewer:</strong>
-        <span style="color:var(--text-body);">IEEE (TPDS, TMC, TPAMI, TCAD, TVLSI, TNNLS, TSN, TKDE, TITS), ACM TIST.</span>
-      </li>
+      <li><strong>Conference Reviewer:</strong> NeurIPS, ICML, ICLR, CVPR, IJCAI, AAAI, ACM MM.</li>
+      <li><strong>Journal Reviewer:</strong> IEEE TPDS, TMC, TPAMI, TCAD, TVLSI, TNNLS, TSN, TKDE, TITS; ACM TIST.</li>
       <li><strong>External Reviewer:</strong> MICRO, HPCA, ASPLOS.</li>
     </ul>
 
     <h2 id="students">Mentored Students</h2>
-    <p>✨If you are passionate about research and innovation, I warmly invite you to join us on this exciting academic journey!</p>
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom: 8px;">
+      If you are passionate about research, I warmly invite you to join us on this academic journey.
+    </p>
     <ul>
-      <li><strong>Xinpeng Qin</strong>, UESTC (B.S.) ---&gt; Tsinghua University (M.S.)</li>
-      <li><strong>Shuaihang Zhong</strong>, UESTC (B.S.) ---&gt; Nanjing University (M.S.)</li>
-      <li><strong>Xuyang Wei</strong>, UESTC (B.S.) ---&gt; UESTC (M.S.)</li>
-      <li><strong>Yunqi Li</strong>, RPI (B.S.) ---&gt; UNC (M.S.)</li>
-      <li><strong>Shitian Li</strong>, UMAC (B.S.) ---&gt; NUS (M.S.)</li>
+      <li><strong>Xinpeng Qin</strong>, UESTC (B.S.) &rarr; Tsinghua University (M.S.)</li>
+      <li><strong>Shuaihang Zhong</strong>, UESTC (B.S.) &rarr; Nanjing University (M.S.)</li>
+      <li><strong>Xuyang Wei</strong>, UESTC (B.S.) &rarr; UESTC (M.S.)</li>
+      <li><strong>Yunqi Li</strong>, RPI (B.S.) &rarr; UNC (M.S.)</li>
+      <li><strong>Shitian Li</strong>, UMAC (B.S.) &rarr; NUS (M.S.)</li>
     </ul>
 
     <h2 id="awards">Awards</h2>
     <ul>
-      <li><em>10/2024</em>, NeurIPS 2024 Scholar Award</li>
-      <li><em>08/2022</em>, UM Macao PhD Scholarship</li>
-      <li><em>06/2022</em>, Outstanding Graduate, Xi'an Jiaotong University</li>
-      <li><em>09/2019/2020/2021</em>, Outstanding Student, Xi'an Jiaotong University</li>
-      <li><em>10/2020</em>, The ABU Asia-Pacific Robot Contest (ROBOCON), First Prize</li>
+      <li><em>10/2024</em> &mdash; NeurIPS 2024 Scholar Award</li>
+      <li><em>08/2022</em> &mdash; UM Macao PhD Scholarship</li>
+      <li><em>06/2022</em> &mdash; Outstanding Graduate, Xi'an Jiaotong University</li>
+      <li><em>2019&ndash;2021</em> &mdash; Outstanding Student, Xi'an Jiaotong University</li>
+      <li><em>10/2020</em> &mdash; ABU Asia-Pacific Robot Contest (ROBOCON), First Prize</li>
     </ul>
 
-    <h2 id="teaching">Teaching Assistants</h2>
+    <h2 id="teaching">Teaching</h2>
     <ul>
-      <li>CISC7203, Database and Data Mining Technologies @UM (Graduate), Spring 2025.</li>
-      <li>CISC7204, Data Science and Data Visualization @UM (Graduate), Fall 2024.</li>
-      <li>CISC1001, Programming Science @UM (Undergraduate), Spring 2024.</li>
-      <li>CISC2001, Computer Organization @UM (Undergraduate), Fall 2023.</li>
-      <li>CISC7303, Cloud Computing @UM (Graduate), Spring 2023.</li>
-      <li>CISC2001, Computer Organization @UM (Undergraduate), Fall 2022.</li>
+      <li>CISC7203, Database and Data Mining Technologies, UM (Graduate), Spring 2025.</li>
+      <li>CISC7204, Data Science and Data Visualization, UM (Graduate), Fall 2024.</li>
+      <li>CISC1001, Programming Science, UM (Undergraduate), Spring 2024.</li>
+      <li>CISC2001, Computer Organization, UM (Undergraduate), Fall 2023.</li>
+      <li>CISC7303, Cloud Computing, UM (Graduate), Spring 2023.</li>
+      <li>CISC2001, Computer Organization, UM (Undergraduate), Fall 2022.</li>
     </ul>
 
     <div class="footer-widget">
@@ -827,6 +827,18 @@
       tab.addEventListener('click', () => setPubFilter(tab.dataset.pubFilter));
     });
     setPubFilter('system');
+
+    // News toggle
+    const newsToggle = document.getElementById('newsToggle');
+    const newsList = document.getElementById('newsList');
+    let newsExpanded = false;
+    newsToggle.addEventListener('click', () => {
+      newsExpanded = !newsExpanded;
+      newsList.querySelectorAll('.news-hidden').forEach(li => {
+        li.style.display = newsExpanded ? 'flex' : 'none';
+      });
+      newsToggle.textContent = newsExpanded ? 'Show less' : 'Show more';
+    });
   </script>
 
 </body>
